@@ -2,7 +2,6 @@
  * @description 装饰器定义
  */
 
-import { BaseUI } from "../ui/base/BaseUI";
 
 /**
  * @description bundle入口程序注册
@@ -12,6 +11,7 @@ import { BaseUI } from "../ui/base/BaseUI";
  * @returns 
  */
 export function registerEntry(className: string, bundle: string) {
+    console.log("registerEntry", className, bundle);
     return function (target: any) {
         if ( typeof app == "object" ){
             target["__classname__"] = className;

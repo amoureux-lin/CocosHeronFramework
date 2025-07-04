@@ -11,6 +11,7 @@ import { ResManager } from "./assets/ResManager";
 import { AudioManager } from "./audio/AudioManager";
 import { storage } from "./storage/StorageManager";
 import { WebSocketManager } from './network/WebSocketManager';
+import { TimerManager } from './timer/TimerManager';
 
 export { AsyncQueue } from "../core/utils/AsyncQueue";
 export type { NextFunction } from "../core/utils/AsyncQueue";
@@ -18,6 +19,7 @@ export {Entry} from "./entry/Entry"
 export {LayerType} from "./ui/UIDefine"
 export {registerEntry} from "./defines/Decorators"
 export  * as i18n from "./utils/i18n/I18n"
+export {EventMessage} from "./message/EventMessage";
 
 export class Framework {
     /**@description 日志 */
@@ -58,9 +60,12 @@ export class Framework {
         return Singleton.get(WebSocketManager)!;
     }
 
+    /** 游戏时间管理 */
+    timer: TimerManager;
     /** 游戏音乐管理 */
     audio: AudioManager;
     persist:Node = null;
+    
 
     constructor(){
         //日志初始化
@@ -79,6 +84,8 @@ export class Framework {
         // //创建音频模块
         this.audio = this.persist.addComponent(AudioManager);
         this.audio.load();
+        //创建时间模块
+        this.timer = this.persist.addComponent(TimerManager)!;
     }
 
     /**
