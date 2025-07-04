@@ -1,6 +1,4 @@
-
-
-import PackageJSON from "../package.json"
+const PackageJSON = require("../package.json");
 /**
  * @en Registration method for the main process of Extension
  * @zh 为扩展的主进程的注册方法
@@ -9,10 +7,6 @@ export const methods: { [key: string]: (...any: any) => any } = {
     openDefaultPanel() {
         console.log("PackageJSON.name",PackageJSON.name)
         Editor.Panel.open(PackageJSON.name);
-    },
-    onSceneReady(){
-        console.log("++++++++++++++++++++");
-        
     }
 };
 
