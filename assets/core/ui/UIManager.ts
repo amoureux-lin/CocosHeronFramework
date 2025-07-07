@@ -8,10 +8,9 @@ import { LayerPopUp } from "./base/LayerPopup";
 import { LayerDialog } from "./base/LayerDialog";
 
 
-export class UIManager implements ISingleton{
-    static module: string = "【UI管理器】";
-    module: string = null!;
-    isResident?: boolean  = true;
+export class UIManager{
+    /** 单例实例 */
+    public static readonly instance: UIManager = new UIManager();
 
     /** 界面根节点 */
     root!: Node;
@@ -110,6 +109,12 @@ export class UIManager implements ISingleton{
      */
     initConfig(configs: { [key: number]: UIConfig }): void {
         this.configs = configs;
+    }
+
+    addConfig(configs: { [key: number]: UIConfig }){
+        this.configs = {...this.configs,...configs};
+        console.log(this.configs);
+        
     }
 
     /**

@@ -3,14 +3,10 @@ import { Asset, assetManager, AssetManager, Component, SpriteFrame, Texture2D } 
 import { AssetType, CompleteCallback, Paths, ProgressCallback, resLoader } from './ResLoader';
 
 const win = window as any;
-export class ResManager  implements ISingleton{
+export class ResManager{
     
     /** 单例实例 */
     public static readonly instance: ResManager = new ResManager();
-
-    isResident?: boolean = true;
-    static module: string = "【资源管理器】";
-    module: string = null!;
 
     currentBundle:string = "";
 

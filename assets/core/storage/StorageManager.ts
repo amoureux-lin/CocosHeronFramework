@@ -170,5 +170,3 @@ export class StorageManager {
         return `${this.id}_${key}`;
     }
 }
-
-export const storage = StorageManager.instance;

@@ -1,9 +1,9 @@
 import { sys } from "cc";
 
-export class Query implements ISingleton{
-    static module: string = "【查询管理器】";
-    module: string = null!;
-    isResident?: boolean = true;
+export class Query {
+    /** 单例实例 */
+    public static readonly instance: Query = new Query();
+
     private _data: any = null;
     /** 浏览器地址栏原始参数 */
     public get data(): any {

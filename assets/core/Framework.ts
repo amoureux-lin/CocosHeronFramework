@@ -1,71 +1,50 @@
-import { WebSock } from './network/WebSock';
 import {director, Node} from "cc"
-import { Entry } from "./entry/Entry";
-import { EntryManager } from "./entry/EntryManager";
 import { Logger } from "./log/Logger";
 import { Query } from "./query/Query";
 import { UIManager} from "./ui/UIManager";
-import { Singleton } from "./utils/Singleton";
 import { MessageManager } from "./message/MessageManager";
 import { ResManager } from "./assets/ResManager";
-import { AudioManager } from "./audio/AudioManager";
-import { storage } from "./storage/StorageManager";
+import { AudioComponent } from "./audio/AudioComponent";
+import { StorageManager } from "./storage/StorageManager";
 import { WebSocketManager } from './network/WebSocketManager';
-import { TimerManager } from './timer/TimerManager';
+import { TimerComponent } from './timer/TimerComponent';
 
 export { AsyncQueue } from "../core/utils/AsyncQueue";
 export type { NextFunction } from "../core/utils/AsyncQueue";
 export {Entry} from "./entry/Entry"
 export {LayerType} from "./ui/UIDefine"
-export {registerEntry} from "./defines/Decorators"
 export  * as i18n from "./utils/i18n/I18n"
 export {EventMessage} from "./message/EventMessage";
 
 export class Framework {
+
     /**@description 日志 */
-    get logger() {
-        return Singleton.get(Logger)!;
-    }
+    logger:Logger = Logger.instance;
+
     /**@description URL*/
-    get query(){
-        return Singleton.get(Query)!;
-    }
+    query:Query = Query.instance;
+
     /**@description UI管理器*/
-    get gui(){
-        return Singleton.get(UIManager)!;
-    }
-
-    /**@description 入口管理器 */
-    get entryManager() {
-        return Singleton.get(EntryManager)!;
-    }
+    gui:UIManager = UIManager.instance;
 
     /**@description 消息管理器 */
-    get message (){
-        return Singleton.get(MessageManager)!;
-    }
+    message:MessageManager = MessageManager.instance;
 
     /**@description 消息管理器 */
-    get res (){
-        return Singleton.get(ResManager)!;
-    }
+    res:ResManager = ResManager.instance;
 
     /**@description 本地存储 */
-    get storage(){
-        return storage;
-    }
+    storage:StorageManager = StorageManager.instance;
 
     /**@description netWork */
-    get webSocket(){
-        return Singleton.get(WebSocketManager)!;
-    }
+    webSocket:WebSocketManager = WebSocketManager.instance;
 
     /** 游戏时间管理 */
-    timer: TimerManager;
+    timer: TimerComponent;
     /** 游戏音乐管理 */
-    audio: AudioManager;
+    audio: AudioComponent;
     persist:Node = null;
-    
+
 
     constructor(){
         //日志初始化
@@ -75,17 +54,14 @@ export class Framework {
     public onLoad(node:Node){
         //UI管理初始
         this.gui.init(node);
-        //入口管理器
-        this.entryManager.init(node);
-
         // 创建持久根节点
         this.persist = new Node("PersistNode");
         director.addPersistRootNode(this.persist);
         // //创建音频模块
-        this.audio = this.persist.addComponent(AudioManager);
+        this.audio = this.persist.addComponent(AudioComponent);
         this.audio.load();
         //创建时间模块
-        this.timer = this.persist.addComponent(TimerManager)!;
+        this.timer = this.persist.addComponent(TimerComponent)!;
     }
 
     /**

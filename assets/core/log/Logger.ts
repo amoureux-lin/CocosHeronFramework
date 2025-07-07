@@ -1,20 +1,19 @@
 import { EDITOR } from "cc/env";
 
-export class Logger implements ISingleton{
-    static module: string = "【日志管理器】";
-    module: string = null!;
-    isResident?: boolean = true;
+export class Logger {
+  /** 单例实例 */
+  public static readonly instance: Logger = new Logger();
 
   private originalConsole = { ...console };
   public enabled: boolean = true;
 
   public init(): void {
-    if(!EDITOR){
+    if (!EDITOR) {
       this.overrideAll();
     }
   }
 
-  
+
   private typeLabels: Record<string, string> = {
     log: '普通',
     info: '信息',

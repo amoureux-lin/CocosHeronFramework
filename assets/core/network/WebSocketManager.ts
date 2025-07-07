@@ -4,22 +4,11 @@ var NetNodeStateStrs = ["已关闭", "连接中", "验证中", "可传输数据"
 /*
  * 网络节点管理类
  */
-export class WebSocketManager  implements ISingleton{
+export class WebSocketManager{
 
-    isResident?: boolean = true;
-    static module: string = "【事件管理器】";
-    module: string = null!;
-
-    private static _instance: WebSocketManager;
-
-    /** 网络管理单例对象 */
-    static getInstance(): WebSocketManager {
-        if (!this._instance) {
-            this._instance = new WebSocketManager();
-        }
-        return this._instance;
-    }
-
+    /** 单例实例 */
+    public static readonly instance: WebSocketManager = new WebSocketManager();
+    
     //Socket
     protected _connectOptions: NetConnectOptions | null = null;
     protected _autoReconnect: number = 0;

@@ -77,14 +77,10 @@ export class MessageEventData {
 /** 
  * 全局消息管理
  */
-export class MessageManager implements ISingleton {
+export class MessageManager{
 
     /** 单例实例 */
     public static readonly instance: MessageManager = new MessageManager();
-
-    isResident?: boolean = true;
-    static module: string = "【事件管理器】";
-    module: string = null!;
 
     private events: Map<string, Array<EventData>> = new Map();
 

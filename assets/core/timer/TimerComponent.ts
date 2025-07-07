@@ -4,7 +4,7 @@ import { Timer } from "./Timer";
 import { StringUtil } from "../utils/StringUtil";
 
 /** 时间管理 */
-export class TimerManager extends Component {
+export class TimerComponent extends Component {
     /** 倒计时数据 */
     private times: any = {};
     /** 服务器时间 */
