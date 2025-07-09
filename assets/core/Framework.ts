@@ -8,6 +8,7 @@ import { AudioComponent } from "./audio/AudioComponent";
 import { StorageManager } from "./storage/StorageManager";
 import { WebSocketManager } from './network/WebSocketManager';
 import { TimerComponent } from './timer/TimerComponent';
+import { FrameworkUtils } from "./utils/utils";
 
 export { AsyncQueue } from "../core/utils/AsyncQueue";
 export type { NextFunction } from "../core/utils/AsyncQueue";
@@ -15,6 +16,7 @@ export {Entry} from "./entry/Entry"
 export {LayerType} from "./ui/UIDefine"
 export  * as i18n from "./utils/i18n/I18n"
 export {EventMessage} from "./message/EventMessage";
+
 
 export class Framework {
 
@@ -38,6 +40,8 @@ export class Framework {
 
     /**@description netWork */
     webSocket:WebSocketManager = WebSocketManager.instance;
+
+    frameWorkUtil = FrameworkUtils;
 
     /** 游戏时间管理 */
     timer: TimerComponent;
